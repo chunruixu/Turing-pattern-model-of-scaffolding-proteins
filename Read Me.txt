@@ -1,0 +1,8 @@
+1. RunCode.m is the main file to run simulations and generate figures.
+2. main1.com is run the simulation of one cell cycle
+3. main_DIV.m is the simulation after z-ring closure.
+
+4. folder OPT10com includes codes for optimization:
+4.1- RunlterationOPT.mat is the main file to run multipoloptimization.
+4.2- GA.m is using GA to run one round of optimization.
+4.3- fitness2.m includes the objective functions
