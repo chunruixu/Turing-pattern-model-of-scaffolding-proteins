@@ -24,6 +24,23 @@ mutant='WT';%
 
 
 %% initial values
+%initial input of initial values:
+% y0=zeros(396,1);%SW IC - first cell cycle
+ 
+% y0(11:20)=10e-6;%PodJp
+% y0(21:28)=0.001; y0(29:30)=0.1;%PodJS
+% y0(61:68)=0.5; y0(69:70)=2;%25;%PopZp
+% y0(71:80)=0.2; y0(81:90)=0.5;%CtrA and CtrAP
+% y0(91:100)=0.05; %PleCf
+% y0(44)=0.1;%PleCb
+% % y0(77:80)=0.2;%DivK
+% % y0(76)=0.05;%DivJb:DivKP
+% y0(97:100)=0.01;%DivLf
+% y0(113:128)=0.001;%All single CckA
+% y0(145:148)=0.1;%CpdRf
+% y0(153:156)=0.1;%CpdRP
+% y0(396)=0.02*20; y0(163)=0.02*30;
+
 load('y0_10com_4.mat')
  yori=y0;
    
@@ -38,8 +55,6 @@ if G==1
  TITLE= [num2str(i) 'cellcyle'];
 
 [Y, time, y0_,TE,IE,Y1,time1,Y2,time2,DNArep]=main1(y0,celltype,ver,mutant);%simulation
-
-% resultgraph10com(Y,time,celltype,mutant,TITLE,1)% plot WT figures
 resultgraph10com1(Y,time,celltype,mutant,TITLE,1) % same WT figures but in different format
 result_PlotMutant3(Y,time,celltype,mutant,TITLE,1) %plot mutant figures
 
