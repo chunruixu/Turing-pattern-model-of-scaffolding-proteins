@@ -106,7 +106,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 % caxis([0 0.35]);
-title('\Delta podJ','fontweight','bold','fontsize',FONTSIZE)
+title('\Delta {\itpodJ}','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -175,7 +175,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 % caxis([0 0.35]);
-title('\Delta spmX','fontweight','bold','fontsize',FONTSIZE)
+title('\Delta {\itspmX}','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -242,7 +242,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 % caxis([0 0.35]);
-title('\Delta popZ','fontweight','bold','fontsize',FONTSIZE)
+title('\Delta {\itpopZ}','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -424,7 +424,7 @@ DivKtot(11,:) = a;
         pcolor(time, M, DivKtot)
 shading flat
 colorbar
-% caxis([0.1 0.35]);
+% caxis([0 0.9]);
 % xlabel('time (min)')
 title('DivKtot')
 
@@ -463,8 +463,8 @@ subplot(2,1,1)
 pcolor(time, M, DivKPT)
 shading flat
 colorbar
-% caxis([0 0.35]);
-title(['(e)' mutant],'fontweight','bold','fontsize',FONTSIZE)
+caxis([0 0.9]);
+title(['(e) {\itpleC-F778L}' ],'fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -530,7 +530,7 @@ subplot(2,1,1)
 pcolor(time, M, DivKPT)
 shading flat
 colorbar
-% caxis([0 0.35]);
+caxis([0 0.9]);
 title('(f) delocalized PleC','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
@@ -597,7 +597,7 @@ subplot(2,1,1)
 pcolor(time, M, DivKPT)
 shading flat
 colorbar
-% caxis([0 0.35]);
+caxis([0 0.9]);
 title('(g) delocalized DivL','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
@@ -693,7 +693,7 @@ DivKtot(11,:) = a;
 shading flat
 colorbar
 ylabel('DivKtot','fontweight','bold','fontsize',FONTSIZE)
-title('(a) \Delta divJ','fontweight','bold','fontsize',FONTSIZE)
+title('(a) \Delta {\itdivJ}','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
 pcolor(time, M, CtrAP)
@@ -768,7 +768,7 @@ shading flat
 colorbar
 % caxis([8 11]);
 ylabel('DivKtot','fontweight','bold','fontsize',FONTSIZE)
-title(['(b)' mutant],'fontweight','bold','fontsize',FONTSIZE)
+title(['(b) {\itdivJ-H338A}'],'fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
 pcolor(time, M, CtrAP)
@@ -898,7 +898,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 % caxis([0 0.35]);
-title('(c) \Delta pleC','fontweight','bold','fontsize',FONTSIZE)
+title('(c) \Delta {\itpleC}','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -963,7 +963,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 % caxis([0 0.35]);
-title(['(d)' mutant],'fontweight','bold','fontsize',FONTSIZE)
+title(['(d) {\itpleC-H610A}'],'fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;

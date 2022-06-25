@@ -4,18 +4,16 @@ close all
 
 
 %% version of params
-ver=9;
+ver=1;
 
 %% cell type: 'SW' 
 celltype='SW';
 %% mutant type
-mutant='WT';%
+mutant='WT';%'WT' for wild type cell simulation; mutant simulations are shown below:
  %mutantlist1: 'deltaPodJ';PodJ+;deltaSpmX; SpmX+; deltaPopZ; deltaMmpA; deltaPerP
  %mutantlist2: 'deltaDivJ'  deltaPleC deltaDivJ&deltaPleC PleC-H610A
  %DivJ-H338A DivK-D53A DivK-D90G  PleC-F778L DivL_A601 DivL_Y550F
  %'DivK-D90G&deltaPleC'
- 
-%   mutant='PleC-F778L';%
  %%%prediction%%%
  %'p1:deletingPleCphosphatase'   'p2:deletingPleCDivKPbinding'  'p5:overDivLDivKbinding'
 %  p6:decreaseDivLDivKbinding  p4:deletingPodJDivLbinding  p3:deletingPodJPleCbinding
@@ -23,10 +21,9 @@ mutant='WT';%
 %  mutant='p4:deletingPodJDivLbinding';
 
 
-%% initial values
-%initial input of initial values:
+%% originial initial values based on experimental observations:
 % y0=zeros(396,1);%SW IC - first cell cycle
- 
+% % 
 % y0(11:20)=10e-6;%PodJp
 % y0(21:28)=0.001; y0(29:30)=0.1;%PodJS
 % y0(61:68)=0.5; y0(69:70)=2;%25;%PopZp
@@ -41,21 +38,24 @@ mutant='WT';%
 % y0(153:156)=0.1;%CpdRP
 % y0(396)=0.02*20; y0(163)=0.02*30;
 
+%% initial values
 load('y0_10com_4.mat')
- yori=y0;
+
+yori=y0;
    
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%timer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 G=1; %run simulations
 if G==1
- CycleNum=3; %number of cell cycles
+ CycleNum=4; %number of cell cycles
  for i=1:CycleNum
  TITLE= [num2str(i) 'cellcyle'];
 
 [Y, time, y0_,TE,IE,Y1,time1,Y2,time2,DNArep]=main1(y0,celltype,ver,mutant);%simulation
-resultgraph10com1(Y,time,celltype,mutant,TITLE,1) % same WT figures but in different format
+
+resultgraph10com(Y,time,celltype,mutant,TITLE,1)% plot WT figures
 result_PlotMutant3(Y,time,celltype,mutant,TITLE,1) %plot mutant figures
 
 if DNArep
@@ -66,11 +66,10 @@ end
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%mutant sim
 M=0;  %calculate DivK~P in different mutants
 if M==1
 
-mutantlist = {'WT','deltaSpmX','deltaDivJ', 'deltaPleC', 'deltaDivJ&deltaPleC', 'deltaPodJ'};
+mutantlist = {'WT','deltaSpmX','deltaDivJ', 'deltaPleC', 'deltaPodJ'};
 
 
 DivKPlist =[];
@@ -84,7 +83,7 @@ for i=1:length(mutantlist)
 
 mutant=mutantlist(i);
 
-CycleNum=2;  %output the DivK~P value in the second cycle
+CycleNum=4;  %output the DivK~P value in the second cycle
  for j=1:CycleNum
 [Y, time, y0_,TE,IE,Y1,time1,Y2,time2,DNArep]=main1(y0,celltype,ver,mutant);%simulation
 if DNArep
