@@ -29,14 +29,12 @@ mutant='WT';%'WT' for wild type cell simulation; mutant simulations are shown be
 % y0(61:68)=0.5; y0(69:70)=2;%25;%PopZp
 % y0(71:80)=0.2; y0(81:90)=0.5;%CtrA and CtrAP
 % y0(91:100)=0.05; %PleCf
-% y0(44)=0.1;%PleCb
-% % y0(77:80)=0.2;%DivK
-% % y0(76)=0.05;%DivJb:DivKP
-% y0(97:100)=0.01;%DivLf
-% y0(113:128)=0.001;%All single CckA
-% y0(145:148)=0.1;%CpdRf
-% y0(153:156)=0.1;%CpdRP
-% y0(396)=0.02*20; y0(163)=0.02*30;
+% y0(110)=0.1;%PleCb
+% y0(241:250)=0.01;%DivLf
+% y0(281:290)=0.001;  y0(31:310)=0.001;%All single CckA
+% y0(361:370)=0.1;%CpdRf
+% y0(371:381)=0.1;%CpdRP
+% y0(396)=0.02*10; 
 
 %% initial values
 load('y0_10com_4.mat')
