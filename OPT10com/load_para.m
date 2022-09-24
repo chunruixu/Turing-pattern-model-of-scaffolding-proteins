@@ -19,7 +19,8 @@ p.deg_podJp =p.deg_podJm;% 0.05;
 p.deg_podJ1 =0.007;%0.007;%0.007;%paper116
  
 p.dnv_podJ =2;%0.1*theta(3);% 15              % denovo polymerization 12 in dissertation for table C.2; 1 for table C.1
-p.aut1_podJ =90;%+20;%10;               % autocatalytic polymerization (pole)
+% p.aut1_podJ =90;%+20;%10;               % autocatalytic polymerization (pole)
+p.aut1_podJ =75;%0902
 p.aut1_podJ1=0.8*p.aut1_podJ;%central compartment autcatalytic polymerization
 p.depol_podJ =0.2;%0.5;             % deplymerization 
  
@@ -151,6 +152,9 @@ p.dephoCpdR=1*4;
 p.D_CpdR=1.6386e+03;
 p.Jd_CpdR1=0;
 p.ukdephoCpdR=0.5;  
+
+
+
 end
 if strcmp(mutant,'deltaPodJ')
     p.syn_podJ = 0;

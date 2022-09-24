@@ -1,8 +1,8 @@
-function [Y, time, y0_,T_e1,DNArep]=main(y0,para,ver,mutant)
-
+% function [Y, time, y0_,T_e1,DNArep]=main(y0,para,ver,mutant)
+function [Y, time, y0_,TEOUT1,IEOUT1,Y_output1,time1,Y_output2,time2,DNArep,T_e1]=main(y0,para,ver,mutant)
 global T_e1 T_term
 TDETECT=300;
-T_e1=TDETECT;%5/12 300-90 max time of Tini this study can detect
+T_e1=TDETECT;%
 T_Sphase=90;
 
 y0first=y0;
@@ -17,18 +17,19 @@ tspan=400;%125;
 t0  =  0;       % Start time
 tf  = tspan;%     % End time  Z-ring closed
 
-
+xoverFcn = @(t,y) podJ_event(t,y,TS);
+options  =  odeset('Events',xoverFcn,'RelTol',1e-4,'AbsTol',1e-6);
+odefun = @(t, y) ODE_CpdR(t, y,para);
 tout = t0;
 y0 = y0.';
 yout = y0;
 
+
+
 teout  =  [];
 yeout  =  [];
 ieout  =  [];
-xoverFcn = @(t,y) podJ_event(t,y,TS);
-options  =  odeset('Events',xoverFcn,'RelTol',1e-4,'AbsTol',1e-6);
-% options = odeset('Events', @events5RegCPLX, 'RelTol', 1e-5, 'AbsTol', 1e-7);
-odefun = @(t, y) ODE12(t, y, para);
+
 
 while t0<tf
  [t,y,te,ye,ie] = ode15s(odefun,[t0 tf],y0,options);
@@ -100,7 +101,7 @@ TEOUT1=teout; IEOUT1=ieout;
 %% cut the simulation [0 z-ring-closed]
 if T_e1<300
     DNArep=1;
-[~,Index] = min(abs(time1-T_term+5));
+[~,Index] = min(abs(time1-T_term-5));
 time1=time1(1:Index);
 Y_output1=Y_output1(:,1:Index);
 M1=M1(:,1:Index);

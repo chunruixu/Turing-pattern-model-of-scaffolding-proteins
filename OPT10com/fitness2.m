@@ -2,7 +2,7 @@ function error=fitness2(para)
 warning('error','MATLAB:ode15s:IntegrationTolNotMet');
 global p;
 ver=1;
-%y0
+% y0
 load('y0_10com_4.mat')
 
 load_para(ver,'WT');%load fixed parameters
@@ -96,9 +96,12 @@ YOUT = {};
 TOUT = {};
 IniT = {};
  CycleNum=3;
+ 
+ 
 for i=1:CycleNum
     try  
-        [Y, t, ~,IniTime]=main(y0,para,ver,'WT');%todo: rep ini time
+        [Y, t, ~,~,~,~,~,~,~,DNArep,IniTime]=main(y0,para,ver,'WT');%simulation
+%         [Y, t, ~,IniTime]=main(y0,para,ver,'WT');%todo: rep ini time
     catch
 %         SimPenalty {i}= 1000;
         break
