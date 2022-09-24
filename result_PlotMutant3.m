@@ -95,7 +95,35 @@ time=tout;
 % time=time+34;
 % end
 
+
+
+
 %% plots
+%%%%%%%%%%%%%Fig 8 WT background
+if strcmp(mutant,'WT')
+figure()
+    set(gcf,'position',[100 100 400 500])%left, lower, right, upper
+subplot(2,1,1)
+ DivKPT(11,:) = a;
+pcolor(time, M, DivKPT)
+shading flat
+colorbar
+caxis([0 0.9]);
+title(['(a) WT' ],'fontweight','bold','fontsize',FONTSIZE)
+ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
+subplot(2,1,2)
+CtrAP(11,:)=a;
+pcolor(time, M, CtrAP)
+shading flat
+colorbar
+% caxis([0 0.1]);
+ylabel('CtrAP','fontweight','bold','fontsize',FONTSIZE)
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 % ha = tight_subplot(2,4,[.06 .03],[.1 .04],[.02 .02]);
 if strcmp(mutant,'deltaPodJ')
     figure()
@@ -195,7 +223,7 @@ ha = tight_subplot(1,4,[.1 .03],[.1 .1],[.05 .04]);
 pcolor(time, M, PodJL)
 shading flat
 colorbar
-% caxis([0 1.5]);
+caxis([0 4]);
 % xlabel('time (min)')
 title('PodJL')
 axes(ha(2)); 
@@ -225,13 +253,7 @@ colorbar
 % xlabel('time (min)')
 title('DivJ')
 
-% PleC(5,:)=a;
-% pcolor(time, M, PleC)
-% shading flat
-% colorbar
-% % caxis([0 0.3]);
-% xlabel('time (min)')
-% title('PleC')
+
 
 elseif strcmp(mutant,'deltaPopZ')
     figure()
@@ -291,121 +313,11 @@ colorbar
 caxis([1.5 3.5]);
 % xlabel('time (min)')
 title('CpdRu')
-% PleC(5,:)=a;
-% pcolor(time, M, PleC)
-% shading flat
-% colorbar
-% caxis([0 0.1]);
-% xlabel('time (min)')
-% title('PleC')
-% caxis([1e-3 6e-3]);
-% xlabel('time (min)')
+
 
 
   
-elseif strcmp(mutant,'deltaPerP')%%%%%%%%%%%%%%%%%%%%
-        figure()
-        subplot(2,1,1)
-        PodJL(11,:)=a;
-pcolor(time, M, PodJL)
-shading flat
-colorbar
-% caxis([0 0.5]);
-xlabel('time (min)')
-title('PodJL')
-subplot(2,1,2)
-PodJS(11,:)=a;
-pcolor(time, M, PodJS)
-shading flat
-colorbar
-% caxis([0 0.5]);
-xlabel('time (min)')
-title('PodJS')
-elseif strcmp(mutant,'deltaMmpA')%%%%%%%%%%%%%%%%%%%%
-        figure()
-        subplot(2,1,1)
-        PodJL(11,:)=a;
-pcolor(time, M, PodJL)
-shading flat
-colorbar
-% caxis([0 0.5]);
-xlabel('time (min)')
-title('PodJL')
-subplot(2,1,2)
-PodJS(11,:)=a;
-pcolor(time, M, PodJS)
-shading flat
-colorbar
-% caxis([0 2]);
-xlabel('time (min)')
-title('PodJS')
-elseif strcmp(mutant,'deltaDivJ&deltaPleC')%%%%%%%%%%%%%%%%%%%%
-    figure()
- set(gcf,'position',[100 100 1800 300])%left, lower, right, upper
-ha = tight_subplot(1,4,[.1 .03],[.1 .1],[.05 .04]);
 
-% subplot(1,4,1)
-axes(ha(1)); 
-% DivKPT(5,:) = a;
-% pcolor(time, M, DivKPT)
-% shading flat
-% colorbar
-% caxis([0 0.35]);
-% % xlabel('time (min)')
-% title('DivKPT')
-DivKtot(11,:) = a;
-        pcolor(time, M, DivKtot)
-shading flat
-colorbar
-% caxis([0.1 0.35]);
-% xlabel('time (min)')
-title('DivKtot')
-
-axes(ha(2)); 
-DivLDivKPT(11,:)=a;
-pcolor(time, M, DivLDivKPT)
-shading flat
-colorbar
-% caxis([0 0.25]);
-% xlabel('time (min)')
-title('DivLDivKPT')
-% subplot(1,4,3)
-axes(ha(3)); 
-CckAkinT(11,:)=a;
-pcolor(time, M, CckAkinT)
-shading flat
-colorbar
-% caxis([0.1 0.35]);
-% xlabel('time (min)')
-title('CckA kinase')
-
-
-axes(ha(4)); 
-CtrAP(11,:)=a;
-pcolor(time, M, CtrAP)
-shading flat
-colorbar
-% caxis([0 0.1]);
-% xlabel('time (min)')
-title('CtrAP')
-    
-  figure()
-    set(gcf,'position',[100 100 400 500])%left, lower, right, upper
-subplot(2,1,1)
- DivKPT(11,:) = a;
-pcolor(time, M, DivKPT)
-shading flat
-colorbar
-% caxis([0 0.35]);
-title('(h) \Delta divJ&\Delta pleC','fontweight','bold','fontsize',FONTSIZE)
-ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
-subplot(2,1,2)
-CtrAP(11,:)=a;
-pcolor(time, M, CtrAP)
-shading flat
-colorbar
-% caxis([0 0.1]);
-ylabel('CtrAP','fontweight','bold','fontsize',FONTSIZE)
 elseif strcmp(mutant,'PleC-F778L')%%%%%%%%%%%%%%%%%%%%
     figure()
  set(gcf,'position',[100 100 1800 300])%left, lower, right, upper
@@ -413,13 +325,6 @@ ha = tight_subplot(1,4,[.1 .03],[.1 .1],[.05 .04]);
 
 % subplot(1,4,1)
 axes(ha(1)); 
-% DivKPT(5,:) = a;
-% pcolor(time, M, DivKPT)
-% shading flat
-% colorbar
-% caxis([0 0.35]);
-% % xlabel('time (min)')
-% title('DivKPT')
 DivKtot(11,:) = a;
         pcolor(time, M, DivKtot)
 shading flat
@@ -464,7 +369,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 caxis([0 0.9]);
-title(['(e) {\itpleC-F778L}' ],'fontweight','bold','fontsize',FONTSIZE)
+title(['(f) {\itpleC-F778L}' ],'fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -473,6 +378,7 @@ shading flat
 colorbar
 % caxis([0 0.1]);
 ylabel('CtrAP','fontweight','bold','fontsize',FONTSIZE)
+
 elseif strcmp(mutant,'p3:deletingPodJPleCbinding')%%%%%%%%%%%%%%%%%%%%
     figure()
  set(gcf,'position',[100 100 1800 300])%left, lower, right, upper
@@ -480,13 +386,6 @@ ha = tight_subplot(1,4,[.1 .03],[.1 .1],[.05 .04]);
 
 % subplot(1,4,1)
 axes(ha(1)); 
-% DivKPT(5,:) = a;
-% pcolor(time, M, DivKPT)
-% shading flat
-% colorbar
-% caxis([0 0.35]);
-% % xlabel('time (min)')
-% title('DivKPT')
 DivKtot(11,:) = a;
         pcolor(time, M, DivKtot)
 shading flat
@@ -531,7 +430,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 caxis([0 0.9]);
-title('(f) delocalized PleC','fontweight','bold','fontsize',FONTSIZE)
+title('(g) delocalized PleC','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -598,7 +497,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 caxis([0 0.9]);
-title('(g) delocalized DivL','fontweight','bold','fontsize',FONTSIZE)
+title('(h) delocalized DivL','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -608,92 +507,16 @@ colorbar
 % caxis([0 0.1]);
 ylabel('CtrAP','fontweight','bold','fontsize',FONTSIZE)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% elseif strcmp(mutant,'deltaDivJ')||strcmp(mutant,'deltaDivJ&deltaPleC')||strcmp(mutant,'PleC-H610A')||strcmp(mutant,'PleC-F778L')||strcmp(mutant,'p5:overDivLDivKbinding')||strcmp(mutant,'p6:decreaseDivLDivKbinding')||strcmp(mutant,'p4:deletingPodJDivLbinding')%%%%%%%%%%%%%%%%%%%%
-elseif find(ismember(mutant, { 'p5:overDivLDivKbinding',...
-        'p6:decreaseDivLDivKbinding',...
-        'p7:decreasePleCDivKbinding','p8:DivJDivKbinding','p1:deletingPleCphosphatase',...
-        'DivK-D90G','DivK-D90G&deltaPleC','DivL_Y550F','DivL_A601'}))
-     figure()
- set(gcf,'position',[100 100 1800 300])%left, lower, right, upper
-ha = tight_subplot(1,4,[.1 .03],[.1 .1],[.05 .04]);
-
-% subplot(1,4,1)
-axes(ha(1)); 
-% DivKPT(5,:) = a;
-% pcolor(time, M, DivKPT)
-% shading flat
-% colorbar
-% caxis([0 0.35]);
-% % xlabel('time (min)')
-% title('DivKPT')
-DivKtot(11,:) = a;
-        pcolor(time, M, DivKtot)
-shading flat
-colorbar
-% caxis([0.1 0.35]);
-% xlabel('time (min)')
-title('DivKtot')
-
-axes(ha(2)); 
-DivLDivKPT(11,:)=a;
-pcolor(time, M, DivLDivKPT)
-shading flat
-colorbar
-% caxis([0 0.25]);
-% xlabel('time (min)')
-title('DivLDivKPT')
-% subplot(1,4,3)
-axes(ha(3)); 
-CckAkinT(11,:)=a;
-pcolor(time, M, CckAkinT)
-shading flat
-colorbar
-% caxis([0.1 0.35]);
-% xlabel('time (min)')
-title('CckA kinase')
-
-
-axes(ha(4)); 
-CtrAP(11,:)=a;
-pcolor(time, M, CtrAP)
-shading flat
-colorbar
-% caxis([0 0.1]);
-% xlabel('time (min)')
-title('CtrAP')
-    
-  figure()
-    set(gcf,'position',[100 100 400 500])%left, lower, right, upper
-subplot(2,1,1)
- DivKPT(11,:) = a;
-pcolor(time, M, DivKPT)
-shading flat
-colorbar
-% caxis([0 0.35]);
-title(mutant,'fontweight','bold','fontsize',FONTSIZE)
-ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
-subplot(2,1,2)
-CtrAP(11,:)=a;
-pcolor(time, M, CtrAP)
-shading flat
-colorbar
-% caxis([0 0.1]);
-ylabel('CtrAP','fontweight','bold','fontsize',FONTSIZE)
 elseif strcmp(mutant,'deltaDivJ')
      figure()
     set(gcf,'position',[100 100 400 500])%left, lower, right, upper
 subplot(2,1,1)
-%  DivKPT(5,:) = a;
-% pcolor(time, M, DivKPT)
-% shading flat
-% colorbar
-% caxis([0 0.35]);
 DivKtot(11,:) = a;
         pcolor(time, M, DivKtot)
 shading flat
 colorbar
 ylabel('DivKtot','fontweight','bold','fontsize',FONTSIZE)
-title('(a) \Delta {\itdivJ}','fontweight','bold','fontsize',FONTSIZE)
+title('(b) \Delta {\itdivJ}','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
 pcolor(time, M, CtrAP)
@@ -768,7 +591,7 @@ shading flat
 colorbar
 % caxis([8 11]);
 ylabel('DivKtot','fontweight','bold','fontsize',FONTSIZE)
-title(['(b) {\itdivJ-H338A}'],'fontweight','bold','fontsize',FONTSIZE)
+title(['(c) {\itdivJ-H338A}'],'fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
 pcolor(time, M, CtrAP)
@@ -787,8 +610,6 @@ DivKtot(11,:) = a;
         pcolor(time, M, DivKtot)
 shading flat
 colorbar
-% caxis([0.1 0.35]);
-% xlabel('time (min)')
 title('DivKtot')
 axes(ha(2)); 
 DivKPT(11,:) = a;
@@ -819,73 +640,7 @@ colorbar
 % caxis([0 0.1]);
 % xlabel('time (min)')
 title('DivLtot')
-elseif strcmp(mutant,'DivK-D53A')%%%%%%%%%%%%%%%%%%%%
-    
-    
-    figure()
-    set(gcf,'position',[100 100 400 500])%left, lower, right, upper
-subplot(2,1,1)
-%  DivKPT(5,:) = a;
-% pcolor(time, M, DivKPT)
-% shading flat
-% colorbar
-% caxis([0 0.35]);
-DivKtot(11,:) = a;
-        pcolor(time, M, DivKtot)
-shading flat
-colorbar
-ylabel('DivKtot','fontweight','bold','fontsize',FONTSIZE)
-title(mutant,'fontweight','bold','fontsize',FONTSIZE)
-subplot(2,1,2)
-CtrAP(11,:)=a;
-pcolor(time, M, CtrAP)
-shading flat
-colorbar
-% caxis([0 0.1]);
-ylabel('CtrAP','fontweight','bold','fontsize',FONTSIZE)
-    
-         figure()
- set(gcf,'position',[100 100 1800 300])%left, lower, right, upper
-ha = tight_subplot(1,4,[.1 .03],[.1 .1],[.05 .04]);
 
-% subplot(1,4,1)
-axes(ha(1)); 
-DivKtot(11,:) = a;
-        pcolor(time, M, DivKtot)
-shading flat
-colorbar
-% caxis([0.1 0.35]);
-% xlabel('time (min)')
-title('DivKtot')
-axes(ha(2)); 
-DivKPT(11,:) = a;
-pcolor(time, M, DivKPT)
-shading flat
-colorbar
-% caxis([0 4]);
-% xlabel('time (min)')
-title('DivKPT')
-
-axes(ha(3)); 
-DivLDivKPT(11,:)=a;
-pcolor(time, M, DivLDivKPT)
-shading flat
-colorbar
-% caxis([0 0.25]);
-% xlabel('time (min)')
-title('DivLDivKPT')
-% subplot(1,4,3)
-
-
-
-axes(ha(4)); 
-DivLtot(11,:)=a;
-pcolor(time, M, DivLtot)
-shading flat
-colorbar
-% caxis([0 0.1]);
-% xlabel('time (min)')
-title('DivLtot')
      
 
 elseif strcmp(mutant,'deltaPleC')
@@ -897,8 +652,8 @@ subplot(2,1,1)
 pcolor(time, M, DivKPT)
 shading flat
 colorbar
-% caxis([0 0.35]);
-title('(c) \Delta {\itpleC}','fontweight','bold','fontsize',FONTSIZE)
+% caxis([0 1.2]);
+title('(d) \Delta {\itpleC}','fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -914,13 +669,6 @@ ha = tight_subplot(1,4,[.1 .03],[.1 .1],[.05 .04]);
 
 
 axes(ha(1)); 
-% DivKPT(5,:) = a;
-% pcolor(time, M, DivKPT)
-% shading flat
-% colorbar
-% % caxis([0 1]);
-% % xlabel('time (min)')
-% title('DivKPT')
 DivKtot(11,:) = a;
         pcolor(time, M, DivKtot)
 shading flat
@@ -963,7 +711,7 @@ pcolor(time, M, DivKPT)
 shading flat
 colorbar
 % caxis([0 0.35]);
-title(['(d) {\itpleC-H610A}'],'fontweight','bold','fontsize',FONTSIZE)
+title(['(e) {\itpleC-H610A}'],'fontweight','bold','fontsize',FONTSIZE)
 ylabel('DivKP','fontweight','bold','fontsize',FONTSIZE)
 subplot(2,1,2)
 CtrAP(11,:)=a;
@@ -987,13 +735,6 @@ colorbar
 title('DivKPT')
 
 axes(ha(2)); 
-% DivLDivKPT(5,:)=a;
-% pcolor(time, M, DivLDivKPT)
-% shading flat
-% colorbar
-% % caxis([0 0.25]);
-% % xlabel('time (min)')
-% title('DivLDivKPT')
 PleC(11,:)=a;
 pcolor(time, M, PleC)
 shading flat

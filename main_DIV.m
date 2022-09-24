@@ -8,8 +8,7 @@ y0(391:395)=0;%all S ia assumed to be 0 after Z-ring closed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Integration parameters
 t0  =  0;       % Start time
-% tf  = 30;
-tf=25;%125+25=150
+tf=25;%two daughter cells are assumed to separated 25 min after compartmentalization (Z-ring)
 
 [tout,yout] = ode15s(@ODE_CpdR_DIV,[t0 tf],y0);
  %% construct grid for plotting

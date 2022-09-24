@@ -5,7 +5,7 @@ yvalues=zeros(1,length(data(:,1)));
 for i=1:length(data(:,1))
     leftside=y(t-data(i,1)<=0);
 %     rightside=y(t-data(i,1)>=0);
-    yvalues(i)=leftside(end);
+    yvalues(i)=leftside(end);  %simulated values with same time point of experimental data 
 end
 
 fun= @(scale) sum(((yvalues'-scale*data(:,2))./max(yvalues)).^2./length(data(:,1)));
