@@ -3,8 +3,6 @@ function [Y, time,TEOUT,IEOUT]=main(y0,celltype,ver,mutant,tspan)
 %if Z-ring does not closed or closed later?
 
 global T_e1 T_term
-% T_e1=60;%150;
-% TDETECT=300;
 T_e1=tspan;%5/12 300-90 max time of Tini this study can detect
 T_Sphase=90;%normal is 90
 
@@ -14,15 +12,12 @@ if isempty(celltype)
 end
 
 global p;
-% parameters(1,ver,'WT');%all parameters
+
 parameters(1,ver,mutant);%all parameters
 TS=p.TS; 
 
  %% simulation
  if strcmp(celltype,'SW')
-    % tspan=155;  %60(greatest initiation time)+90(replication time cost)+5(time for Z-ring closed after replication termination)
-%   tspan=400; %5/12 max sim time
-% tspan=750;% ~5 normal cycles
 t0  =  0;       % Start time
 tf  = tspan;%     % End time  
 
@@ -63,17 +58,14 @@ CtrAPV = CtrAPV(end);
 
  if mean(CtrAPV)<=TS
      T_e1 = 15;%min(T_e1,20);
-%      fprintf('T_e1= %8.5f\n',T_e1)
      T_term = T_e1+T_Sphase;
  end
          elseif ie  ==  2%DNA replication initiates
-%         if te<T_e1 && te>15
           if te>15  %can take place multiple times
-        T_e1 = te;
-        elseif te<=15% if replication initiates before 15min
+            T_e1 = te;
+          elseif te<=15% if replication initiates before 15min
             T_e1=15;
-        end
-%         fprintf('T_e1= %8.5f\n',T_e1)
+          end
         T_term = T_e1+T_Sphase;
     elseif ie == 3%Fork passes ctrA
 y0(392)=1;%SctrA changed from 0 to 1
@@ -86,6 +78,69 @@ y0(393)=1;%SpleC
          elseif ie==7
        y0(391:395)=0;
     end
+    t0 = t(nt);
+    if t0 >= tf
+        break;
+    end
+end
+%% 1028 stalked cell
+ elseif strcmp(celltype, 'ST')
+     t0  =  0;       % Start time
+tf  = tspan;%     % End time  
+
+xoverFcn = @(t,y) podJ_eventST(t,y,TS);
+options  =  odeset('Events',xoverFcn,'RelTol',1e-4,'AbsTol',1e-6);
+odefun = @(t, y) ODE_CpdR(t, y);
+tout = t0;
+y0 = y0.';
+yout = y0;
+
+teout  =  [];
+yeout  =  [];
+ieout  =  [];
+
+while t0<tf
+[t,y,te,ye,ie] = ode15s(odefun,[t0 tf],y0,options);
+ nt = length(t);
+%     
+ tout = [tout;t(2:nt)]; 
+ yout = [yout;y(2:nt,:)]; 
+ teout  =  [teout;te];  
+ yeout  =  [yeout;ye]; ieout  =  [ieout;ie];
+    y0  =  y(nt,:);
+     if isscalar(ie)  ==  0
+        ie  =  0;
+     end
+     if ie  ==  1%time >0.0001min
+        %check if average [CtrA~P] is lower than TS        
+         CtrAPV  =y(:,81:90)+y(:,321:330)+y(:,331:340);
+         CtrAPV=CtrAPV';
+         CtrAPV = sum(CtrAPV)./10;
+         CtrAPV = CtrAPV(end);
+
+         if mean(CtrAPV)<=TS
+         T_e1 = 0;
+         end
+      elseif ie  ==  2%DNA replication initiates
+          if T_e1 < 5
+          else
+            if te>5
+            warning('st cell does not initiates DNA replication before 5 min after cell separation')
+              T_e1 = te;
+            end
+          end
+    elseif ie == 3%Fork passes ctrA
+        y0(392)=1;%SctrA changed from 0 to 1
+    elseif ie==4
+        y0(393)=1;%SpleC
+    elseif ie==5
+        y0(394)=1;%SperP
+    elseif ie ==6
+        y0(391)=1;%SpodJ
+     elseif ie==7
+       y0(391:395)=0;
+     end
+    T_term = T_e1+T_Sphase;
     t0 = t(nt);
     if t0 >= tf
         break;

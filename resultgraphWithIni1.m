@@ -291,6 +291,7 @@ title('PopZ')
 axes(ha(3)); 
 SpmX(11,:)=a;
 pcolor(time, M, SpmX)
+caxis([0 3]);
 shading flat
 colorbar
 title('SpmX')
@@ -298,6 +299,7 @@ title('SpmX')
 axes(ha(4)); 
 DivJT(11,:)=a;
 pcolor(time, M, DivJT)
+caxis([0 1]);
 shading flat
 colorbar
 title('DivJ')
@@ -442,7 +444,7 @@ hold off
 axis([tspan 0 max(PodJL_T+PodJS_T)*1.2]);
 ylabel('scaled concentration')
 xlabel('(a)','fontsize',LabelSize)
-h = legend('PodJL','PodJS','Chen 05','Guo 04','Chen 05','Guo 04','Location', 'North','fontsize',LegendSize,'NumColumns',3);
+h = legend('PodJL','PodJS','Chen 05','Guo 14','Chen 05','Guo 14','Location', 'North','fontsize',LegendSize,'NumColumns',3);
   set(h, 'Interpreter', 'tex', 'Box', 'on', 'Orientation', 'vertical');
   
   
@@ -458,7 +460,7 @@ p7 = scatter(dpSpmX3(:,1),dpSpmX3(:,2).*scalary, 'k^', 'LineWidth', 1);
 hold off
 axis([tspan 0 max(SpmX)*1.2]);
 xlabel('(b)','fontsize',LabelSize)
-h = legend('SpmX','Radhakrishnan 07','Guo 04','Location', 'North','fontsize',LegendSize,'NumColumns',3);
+h = legend('SpmX','Radhakrishnan 07','Guo 14','Location', 'North','fontsize',LegendSize,'NumColumns',3);
   set(h, 'Interpreter', 'tex', 'Box', 'on', 'Orientation', 'vertical');
   
   
@@ -477,15 +479,15 @@ hold on
 [score,scalary] = findSquares(tout,DivJT, dpDivJ(1:end-1,:));
 p7 = scatter(dpDivJ(:,1),dpDivJ(:,2).*scalary, 'k+', 'LineWidth', 1);
 hold on
-[score,scalary] = findSquares(tout,DivJT, dpDivJ2(1:end-1,:));
-p7 = scatter(dpDivJ2(:,1),dpDivJ2(:,2).*scalary, 'k^', 'LineWidth', 1);
-hold on
+% [score,scalary] = findSquares(tout,DivJT, dpDivJ2(1:end-1,:));
+% p7 = scatter(dpDivJ2(:,1),dpDivJ2(:,2).*scalary, 'k^', 'LineWidth', 1);
+% hold on
 [score,scalary] = findSquares(tout,DivJT, dpDivJ3(1:end-1,:));
-p7 = scatter(dpDivJ3(:,1),dpDivJ3(:,2).*scalary, 'k*', 'LineWidth', 1);
+p7 = scatter(dpDivJ3(:,1),dpDivJ3(:,2).*scalary, 'k^', 'LineWidth', 1);
 hold off
 axis([tspan 0 max(DivJT)*1.8]);
 xlabel('(c)','fontsize',LabelSize)
-h = legend('DivJ_T','DivJ_f','DivJ_b','Wheeler 1999','Sanselicio 2015','Radhakrishnan 07','Location', 'North','fontsize',LegendSize,'NumColumns',3);
+h = legend('DivJ_T','DivJ_f','DivJ_b','Wheeler 1999','Radhakrishnan 07','Location', 'North','fontsize',LegendSize,'NumColumns',3);
   set(h, 'Interpreter', 'tex', 'Box', 'on', 'Orientation', 'vertical');
 
 
@@ -510,7 +512,7 @@ hold off
 axis([tspan 0 max(PleCT)*1.6]);
 xlabel('(d)','fontsize',LabelSize)
 ylabel('scaled concentration')
-h = legend('PleC_T','PleC_{ph}','PleC_{kin}','Viollier 2002','Guo 04','Location', 'North','fontsize',LegendSize,'NumColumns',3);
+h = legend('PleC_T','PleC_{ph}','PleC_{kin}','Viollier 2002','Guo 14','Location', 'North','fontsize',LegendSize,'NumColumns',3);
  set(h, 'Interpreter', 'tex', 'Box', 'on', 'Orientation', 'vertical');
  
 % axes(ha(5));

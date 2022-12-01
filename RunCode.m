@@ -7,10 +7,12 @@ close all
 ver=1;
 
 %% cell type: 'SW' 
-celltype='SW';
+celltype='SW';  % 'SW' OR 'ST'
 %% mutant type
-mutant='WT';
-%%%%%mutant list: 'deltaPodJ; deltaSpmX; deltaPopZ; 'deltaDivJ';  deltaPleC; PleC-H610A %DivJ-H338A; PleC-F778L;  p4:deletingPodJDivLbinding;  p3:deletingPodJPleCbinding
+mutant = 'WT';
+% mutant='p4:deletingPodJDivLbinding';
+%%%%%mutant list: 'deltaPodJ; deltaSpmX; deltaPopZ; 'deltaDivJ';  deltaPleC; PleC-H610A %DivJ-H338A; PleC-F778L;
+%p4:deletingPodJDivLbinding;  p3:deletingPodJPleCbinding
 
 
 
@@ -31,7 +33,20 @@ mutant='WT';
 % y0(396)=0.02*20; y0(163)=0.02*30;
 
 %% updated initial values
+if strcmp(celltype,'SW')
 load('y0_10com_4.mat')
+else
+load('y0_10com_3.mat')
+[Y, time, ~,~,~,~,~,~,~,DNArep,TDNAini]=main1(y0,'SW',ver,'WT');
+    if DNArep == 0
+        warning('ST sim: cannot replicate')
+    end
+    Time = abs(time-30);
+    MIN = min(Time);%USE simulated results at time~30 min in sw cell cycle as the ini condition for st cell cycle
+    K = find(Time == MIN);
+    y0 = Y(:,K);
+end
+
 
 yori=y0;
    
@@ -41,27 +56,34 @@ yori=y0;
 
 G=1; % 1- run simulations
 if G==1
- CycleNum=1; %number of cell cycles
+ CycleNum=2; %number of cell cycles
  for i=1:CycleNum
  TITLE= [num2str(i) 'cellcyle'];
 
-[Y, time, y0_,TE,IE,Y1,time1,Y2,time2,DNArep]=main1(y0,celltype,ver,mutant);%simulation
+
+[Y, time, y0_,TE,IE,Y1,time1,Y2,time2,DNArep,TDNAini]=main1(y0,celltype,ver,mutant);%simulation
+
+TDNAini
+% DNArep
 TimeIni=TE(find(IE==2));
 TimeZring=TimeIni+95;
 %% if Z-ring is never closed
 % TSpan=750;
 % [Y, time,TE,IE]=main2(y0,celltype,ver,mutant,TSpan);%simulation
 %% 
+if i==CycleNum
+resultgraph10com1(Y,time,celltype,mutant,TITLE,1)% plot WT figures (separate)
+% result_PlotMutant3(Y,time,celltype,mutant,TITLE,1) %plot mutant figures
+end
 
-resultgraphWithIni1(Y,time,TimeIni,TimeZring,celltype,mutant,TITLE,1)%plot WT spatial and temporal figures
-result_PlotMutant3(Y,time,celltype,mutant,TITLE,1) %plot mutant figures
 
 
 if DNArep
 y0=IniValue(Y,celltype);%calculate the initial values for next cycle
 end
- end
 end
+end
+
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
