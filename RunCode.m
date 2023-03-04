@@ -10,7 +10,7 @@ ver=1;
 celltype='SW';  % 'SW' OR 'ST'
 %% mutant type
 mutant = 'WT';
-% mutant='p4:deletingPodJDivLbinding';
+% mutant='deltaPopZ';
 %%%%%mutant list: 'deltaPodJ; deltaSpmX; deltaPopZ; 'deltaDivJ';  deltaPleC; PleC-H610A %DivJ-H338A; PleC-F778L;
 %p4:deletingPodJDivLbinding;  p3:deletingPodJPleCbinding
 
@@ -35,6 +35,8 @@ mutant = 'WT';
 %% updated initial values
 if strcmp(celltype,'SW')
 load('y0_10com_4.mat')
+% y0(69:70)=y0(68); y0(29:30)=y0(28);
+% y0(1:80)=0.01;
 else
 load('y0_10com_3.mat')
 [Y, time, ~,~,~,~,~,~,~,DNArep,TDNAini]=main1(y0,'SW',ver,'WT');
@@ -56,7 +58,7 @@ yori=y0;
 
 G=1; % 1- run simulations
 if G==1
- CycleNum=2; %number of cell cycles
+ CycleNum=1; %number of cell cycles
  for i=1:CycleNum
  TITLE= [num2str(i) 'cellcyle'];
 
@@ -67,14 +69,16 @@ TDNAini
 % DNArep
 TimeIni=TE(find(IE==2));
 TimeZring=TimeIni+95;
+
 %% if Z-ring is never closed
 % TSpan=750;
 % [Y, time,TE,IE]=main2(y0,celltype,ver,mutant,TSpan);%simulation
 %% 
-if i==CycleNum
-resultgraph10com1(Y,time,celltype,mutant,TITLE,1)% plot WT figures (separate)
+% if i==CycleNum
 % result_PlotMutant3(Y,time,celltype,mutant,TITLE,1) %plot mutant figures
-end
+resultgraphncom(Y,time,TimeIni,TimeZring,celltype,mutant,TITLE,1)% plot WT figures
+
+% end
 
 
 

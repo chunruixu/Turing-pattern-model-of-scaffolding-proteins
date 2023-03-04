@@ -165,7 +165,7 @@ p.ukdephoCpdR=0.5;
 load('MultiGA_Output.mat','val');
 para=val(1,:);
 
-
+% p.syn_podJ = 0.009;
 para(19)=145.00;
 p.syn_podJ2=para(1);   p.Ji_PodJCtrA=para(2);  p.syn_spmx=para(3);  p.Ja_SpmXCtrA=para(4); p.syn_ctrA1=para(5); 
 p.syn_ctrA2=para(6);  p.Ja_CtrACtrA=para(7);  p.deg_ctrA2=para(8); p.Jd_CpdR=para(9); p.syn_pleC=para(10); 
@@ -187,25 +187,74 @@ end
 if strcmp(mutant,'deltaPodJ')
     p.syn_podJ = 0;
 p.syn_podJ2 = 0;
+elseif strcmp(mutant,'PodJ+')
+    p.syn_podJ = p.syn_podJ*1.2;
+p.syn_podJ2 = p.syn_podJ2*1.2;
+elseif strcmp(mutant,'PodJ++')
+     p.syn_podJ = p.syn_podJ*12;%3.5;
+p.syn_podJ2 = p.syn_podJ2*12;%3.5;
 elseif strcmp(mutant,'deltaSpmX')
     p.syn_spmx=0;
 elseif strcmp(mutant,'deltaPopZ')
     p.syn_popz=0;
+    elseif strcmp(mutant,'PopZ+')
+     p.syn_popz =  p.syn_popz*12;
+elseif strcmp(mutant,'SpmX+')
+    p.syn_spmx=50*p.syn_spmx;
+elseif strcmp(mutant,'deltaMmpA')
+    p.deg_s=0*p.deg_s;
+    elseif strcmp(mutant,'deltaPerP')
+    p.syn_perP=0*p.syn_perP;
 elseif strcmp(mutant,'deltaDivJ')
    p.syn_divJ=0; %p.alpha_DivLPopZ=0; % p.pho_DivKPleC=0;  %p.b_DivJDivKP=0; p.alpha_CckAPopZ=0;
     elseif strcmp(mutant,'deltaPleC')
     p.syn_pleC=0;
+elseif strcmp(mutant,'deltaDivJ&deltaPleC')
+    p.syn_divJ=0; p.syn_pleC=0;
         elseif strcmp(mutant,'PleC-H610A')
    p.depho_DivK=0; p.pho_DivKPleC = 0;
 elseif strcmp(mutant,'DivJ-H338A')
     p.pho_DivKDivJb=0; p.pho_DivKDivJf=0;
+    elseif strcmp(mutant,'DivK-D53A')
+    p.pho_DivKDivJb=0; p.pho_DivKDivJf=0;  p.pho_DivKPleC=0; 
+ elseif strcmp(mutant,'DivK-D90G')||strcmp(mutant,'DivL_A601')
+    p.b_DivLDivKP=0;%.2*p.b_DivLDivKP;
      elseif strcmp(mutant,'PleC-F778L')
-    p.pho_DivKPleC=0; 
+    p.pho_DivKPleC=0.01*p.pho_DivKPleC; %0; 
+     elseif strcmp(mutant,'DivK-D90G&deltaPleC')
+    p.b_DivLDivKP=0;%.3*p.b_DivLDivKP;%p.depho_DivK=0;
+    p.syn_pleC=0;
+    elseif strcmp(mutant,'p5:overDivLDivKbinding')||strcmp(mutant,'DivL_Y550F')
+    p.b_DivLDivKP=1.5*p.b_DivLDivKP;  %p.pk_cckA2
+%         p.b_DivLDivKP=1.2*p.b_DivLDivKP;
+elseif strcmp(mutant,'p1:deletingPleCphosphatase')
+     p.depho_DivK=0.1*p.depho_DivK;
+elseif strcmp(mutant,'p2:deletingPleCDivKPbinding')
+    p.b_PleCDivKP=0;
+elseif strcmp(mutant,'deltaDivL')
+    p.syn_divL=0;
+% elseif strcmp(mutant,'p3:deletingDivLDivK')
 elseif strcmp(mutant,'p3:deletingPodJPleCbinding')
     p.fb_PleC=0;
 elseif strcmp(mutant,'p4:deletingPodJDivLbinding')
     p.alpha_DivLPodJ=0;
+    elseif strcmp(mutant,'p6:decreaseDivLDivKbinding')
+    p.b_DivLDivKP=0.5*p.b_DivLDivKP; %p.kp_cckA2=3*p.kp_cckA2;% p.kp_cckA2=1;%
+%     p.b_DivLDivKP=1.5*p.b_DivLDivKP; p.kp_cckA2=0.2*p.kp_cckA2;%p.kp_cckA2=1;%
+
+    elseif strcmp(mutant,'p7:decreasePleCDivKbinding')
+    p.b_PleCDivKP=0.1*p.b_DivLDivKP; %p.depho_DivK=5*p.depho_DivK;%1&2
+%     p.b_PleCDivKP=1.5*p.b_DivLDivKP; p.depho_DivK=0.1*p.depho_DivK;%1&2
+     elseif strcmp(mutant,'p8:DivJDivKbinding')
+   p.b_DivJDivK=0.1*p.b_DivJDivK; p.b_DivJDivKP=0.1*p.b_DivJDivKP;
+   p.pho_DivKDivJf=100*p.pho_DivKDivJf;  p.pho_DivKDivJb=100*p.pho_DivKDivJb;%1&2
+%     p.b_PleCDivKP=1.5*p.b_DivLDivKP; %p.depho_DivK=0.1*p.depho_DivK;%1&2
+elseif strcmp(mutant,'p9:p3andp4')
+    p.fb_PleC=0;
+    p.alpha_DivLPodJ=0;
 end
+
+
 
 
 
